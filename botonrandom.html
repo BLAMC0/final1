@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botón Aleatorio</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #contador {
+            margin-top: 30px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h3>Recuerda utilizar este botón cuando no tengas más opciones.</h3>
+    <button onclick="seleccionarOpcion()">¿Listo?</button>
+    <div id="resultado"></div>
+
+    <div id="contador">
+        Veces en que has tomado una decisión: <span id="numeroDeDecisiones">0</span>
+    </div>
+    <button onclick="reiniciarContador()">Reiniciar contador</button>
+
+    <script>
+        let contador = localStorage.getItem('contador') ? parseInt(localStorage.getItem('contador')) : 0;
+
+        // Inicializar el contador al cargar la página
+        document.getElementById("numeroDeDecisiones").innerText = contador;
+
+        function seleccionarOpcion() {
+            const opciones = ["¡Hazlo!, te deseo buena suerte :)", "No lo hagas... piénsalo mejor."];
+            const resultado = opciones[Math.floor(Math.random() * opciones.length)];
+            document.getElementById("resultado").innerText = resultado;
+
+            // Incrementar el contador y actualizar el valor en el localStorage
+            contador++;
+            document.getElementById("numeroDeDecisiones").innerText = contador;
+            localStorage.setItem('contador', contador);
+        }
+
+        function reiniciarContador() {
+            contador = 0;
+            document.getElementById("numeroDeDecisiones").innerText = contador;
+            localStorage.setItem('contador', contador);
+        }
+    </script>
+    
+    <br><br><br>
+    <footer>
+        <p>&copy; 2025 Todos los derechos reservados. Proyecto realizado por Luis F.</p>
+    </footer>
+</body>
+</html>
